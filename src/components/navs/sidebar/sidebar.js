@@ -1,11 +1,10 @@
-import {useState} from 'react';
-import {FaCompass} from 'react-icons/fa';
+import {useState, useEffect} from 'react';
 import * as s from './Sidebar.styles';
 
 const Sidebar = (props) => {
 
     const {
-        brand = '', 
+        brand = {fullName: '', shortName: ''}, 
         bgImg = '',
         menuItems=[],
         fonts = {
@@ -13,7 +12,7 @@ const Sidebar = (props) => {
             menu: ''
         }
     } = props; 
-
+    
      // state for selected menu
      const [menuSelected, setMenuSelected] = useState(menuItems[0].name)
 
@@ -25,19 +24,29 @@ const Sidebar = (props) => {
         setMenuSelected(menuName)
      }
 
+     const [Branding, setBranding] = useState()
+
+     // Effect
+    useEffect(() => {isSidebarOpen ? setTimeout(() => {setBranding(brand.fullName)}, 300) : setTimeout(() => {setBranding(brand.shortName)}, 200)}, [isSidebarOpen, setBranding, brand.fullName, brand.shortName])
+
+
     // loop menu items
     const menuItemsJSX = menuItems && menuItems.map((menu, i) => {
             const isMenuItemSelected = menuSelected === menu.name
             //console.log(`${menu.name} is selected ${isMenuItemSelected}`)
+
             return (
                 <s.MenuItems 
                 key={i} 
                 font={fonts.menu}
                 selected={isMenuItemSelected}
                 onClick={()=>{handleMenuItemOnClick(menu.name)}}
+                isSidebarOpen={isSidebarOpen}
                 >
-                    <s.Icon><FaCompass /></s.Icon>
-                    <s.Text>{menu.name}</s.Text>
+                    <s.MenuItemsWrapper selected={isMenuItemSelected}>
+                        <s.Icon isSidebarOpen={isSidebarOpen}>{menu.icon}</s.Icon>
+                        <s.Text isSidebarOpen={isSidebarOpen} >{menu.name}</s.Text>
+                    </s.MenuItemsWrapper>
                     
                 </s.MenuItems>
                 )
@@ -46,7 +55,7 @@ const Sidebar = (props) => {
     return (
         <s.SidebarContainer bgImg={bgImg} isSidebarOpen={isSidebarOpen}>
             <s.SideBarBrandContainer>
-                <s.SidebarBrand font={fonts.brand}>{brand}</s.SidebarBrand>
+                <s.SidebarBrand font={fonts.brand}>{Branding}</s.SidebarBrand>
             </s.SideBarBrandContainer>
             <s.MenuItemContainer>{menuItemsJSX}</s.MenuItemContainer>
             <s.MenuToggleContainer>

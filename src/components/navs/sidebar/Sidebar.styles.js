@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { FaRegIdBadge } from 'react-icons/fa';
+// import { FaRegIdBadge } from 'react-icons/fa';
 
 export const SidebarContainer = styled.div`
     position: relative; // for menu and toggle container
@@ -15,15 +15,18 @@ export const SidebarContainer = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    transition: .3s ease-in all;
 `
 
 export const SideBarBrandContainer = styled.div`
         position: absolute;
+        text-align: ${props => !props.isSidebarOpen && 'center'};
         width: 100%;
         top: 10px;
         left: 0;
         right: 0;
         margin: 0 auto; 
+        
 `
 
 export const SidebarBrand = styled.div`
@@ -34,7 +37,8 @@ export const SidebarBrand = styled.div`
         // top: 10px;
         left: 0;
         right: 0;
-        margin: 0 auto;       
+        margin: 0 auto; 
+        transition: .5s ease-in all;      
 `
 
 export const MenuItemContainer = styled.div`
@@ -44,27 +48,33 @@ export const MenuItemContainer = styled.div`
         left: 0;
         right: 0;
         margin: 0 auto; 
+        transition: .5s ease-in all;
 `
 
 export const MenuItems = styled.div`
     font-family: ${props => props.font};
-    width: 80%;
+    ${props => !props.isSidebarOpen && `text-align: center; ${props.selected && ''} background: rgba(0, 0, 0, 0.6)`};
+    width: 100%;
     color: ${props => props.selected ? 'rgba(255, 112,85, 0.8)' : 'rgba(255, 255, 255, 1.0)'};
+    white-space: nowrap;
+    top: 0;
     left: 0;
     right: 0;
     margin: 0 auto;
+    padding: 1rem 0 1rem 0;
+    transition: .5s ease-in all;
+
+    // -----------------------------------------------------------------
+    // if need to show higtlight of of sidebarisopn state 
+    // ${props => props.selected && 'background: rgba(0, 0, 0, 0.6)'};
+    // -----------------------------------------------------------------
 
     :hover {
         color: rgba(255, 112,85, 0.8);
         transition: .1s ease-in all;
     }
 
-    &:after {
-        content: '';
-        display: block;
-        border-top: 1px solid ${props => props.selected ? 'rgba(255, 112,85, 0.8)' : 'rgba(255, 255, 255, 1.0)'};
-        margin: 1rem 0 0.5rem 0;
-    }
+    
 
     ${props => !props.selected && `
         &:hover {
@@ -75,13 +85,38 @@ export const MenuItems = styled.div`
         }
     `}
 `
+export const MenuItemsWrapper = styled.div`
+    left: 0;
+    right: 0;
+    margin: 0 auto; 
+    width: 80%;
+
+    &:after {
+        content: '';
+        display: block;
+        border-top: 1px solid ${props => props.selected ? 'rgba(255, 112,85, 0.8)' : 'rgba(255, 255, 255, 0.8)'};
+       
+    }
+`
 
 export const Icon = styled.span`
-        padding: 2rem 1rem 0 0;
+        display: inline;
+        vertical-align: middle;
+        padding: ${props => props.isSidebarOpen &&  '1rem 1rem 0 0rem'};
+        text-align: ${props => !props.isSidebarOpen && 'center'};
+        width: 80%;
+        font-size: 1.3rem;
+        // transition: .8s ease-in all;
 `
 
 export const Text = styled.span`
-        display: inline;
+       
+        display: ${props => props.isSidebarOpen ? 'inline' : 'none'};
+        vertical-align: middle;
+        width: 80%;
+        white-space: nowrap;
+        padding: 1rem 0 0rem 0;
+        transition: .8s ease-in all;  
 `
 
 // Toggeler ------------------------------------------------------------------------------
@@ -101,8 +136,8 @@ export const MenuToggle = styled.div`
         right: 0;
         margin: 0 auto;
         min-width: 40px;
-        // border-top: 1px solid #fff;
         cursor: pointer;
+        transition: .3s ease-in all;
 
         &:after {
             content: '';
