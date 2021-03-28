@@ -26,9 +26,21 @@ const Sidebar = (props) => {
 
      const [Branding, setBranding] = useState()
 
+
      // Effect
+     // Update Branding 
     useEffect(() => {isSidebarOpen ? setTimeout(() => {setBranding(brand.fullName)}, 300) : setTimeout(() => {setBranding(brand.shortName)}, 200)}, [isSidebarOpen, setBranding, brand.fullName, brand.shortName])
 
+    // Update Sidebar state by windows width
+    useEffect(() => {
+        const windowsWidthUpdate = () => {
+            if(window.innerWidth < 1280 && isSidebarOpen) setSidebarState(false);
+            else setSidebarState(true)
+        }
+        window.addEventListener('resize', windowsWidthUpdate)
+        return () => window.removeEventListener('resize', windowsWidthUpdate);
+
+    }, [isSidebarOpen])
 
     // loop menu items
     const menuItemsJSX = menuItems && menuItems.map((menu, i) => {
