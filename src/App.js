@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {FaMicroblog,FaExpand,FaConnectdevelop,FaHome,FaRoute, FaChargingStation, FaChevronRight} from  'react-icons/fa'
 import * as s from './App.styles';
 
 // components
@@ -8,7 +9,7 @@ import Sidebar from './components/navs/sidebar/sidebar';
 
 function App(){
 
-  const brand = "F2Dev";
+  const brand = {fullName: "F2Dev", shortName: "F2"};
   const bgImg = 'images/northern-lights.jpg'
   const fonts = {
     brand: 'Roboto',
@@ -17,18 +18,18 @@ function App(){
 
    // menu items list
    const menuItems = [
-    {name: 'Home', to: '/', icon: '', submenu: [] , status: true },
-    {name: 'About', to: '/about', icon: '', submenu: [] , status: true },
-    {name: 'Services', to: '/services', icon: '', submenu: [] , status: true },
-    {name: 'Destinations', to: '/destinations', icon: 'FaCompass', submenu: [
-        {name: 'Chaweng', to: '/chaweng', icon: '', submenu:[], status: true },
-        {name: 'Lamai', to: '/lamai', icon: '', submenu:[], status: true },
-        {name: 'Choengmon', to: '/choengmon', icon: '', submenu:[], status: true },
-        {name: 'Plaileam', to: '/plaileam', icon: '', submenu:[], status: true },
-        {name: 'Bophut', to: '/bophut', icon: '', submenu:[], status: true },
+    {name: 'Home', to: '/', icon: <FaHome />, submenu: [] , status: true },
+    {name: 'About', to: '/about', icon: <FaExpand />, submenu: [] , status: true },
+    {name: 'Services', to: '/services', icon: <FaChargingStation />, submenu: [] , status: true },
+    {name: 'Destinations', to: '/destinations', icon: <FaRoute />, submenu: [
+        {name: 'Chaweng', to: '/chaweng', icon: <FaChevronRight />, submenu:[], status: true },
+        {name: 'Lamai', to: '/lamai', icon: <FaChevronRight />, submenu:[], status: true },
+        {name: 'Choengmon', to: '/choengmon', icon: <FaChevronRight />, submenu:[], status: true },
+        {name: 'Plaileam', to: '/plaileam', icon: <FaChevronRight />, submenu:[], status: true },
+        {name: 'Bophut', to: '/bophut', icon: <FaChevronRight />, submenu:[], status: true },
     ], status: true},
-    {name: 'Blog', to: '/blog', icon: '', submenu: [] ,status: true },
-    {name: 'Contact', to: '/contact', icon: '', submenu: [] ,status: true },
+    {name: 'Blog', to: '/blog', icon: <FaMicroblog />, submenu: [] ,status: true },
+    {name: 'Contact', to: '/contact', icon: <FaConnectdevelop />, submenu: [] ,status: true },
     ]
 
   return (
