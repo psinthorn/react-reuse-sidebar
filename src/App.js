@@ -10,7 +10,8 @@ import Sidebar from './components/navs/sidebar/sidebar';
 function App(){
 
   const brand = {fullName: "F2Dev", shortName: "F2"};
-  const bgImg = 'images/northern-lights.jpg'
+  // const bgImg = 'images/chipset-neural-network-01.jpg'
+  const bgImg = 'images/neural_network.png';
   const fonts = {
     brand: 'Roboto',
     menu: 'Roboto'
