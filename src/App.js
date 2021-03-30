@@ -29,7 +29,9 @@ function App(){
         {name: 'Plaileam', to: '/plaileam', icon: <FaChevronRight />, submenu:[], status: true },
         {name: 'Bophut', to: '/bophut', icon: <FaChevronRight />, submenu:[], status: true },
     ], status: true},
-    {name: 'Blog', to: '/blog', icon: <FaMicroblog />, submenu: [] ,status: true },
+    {name: 'Blog', to: '/blog', icon: <FaMicroblog />, submenu: [
+      {name: 'Coding', to: '/coding', icon: <FaChevronRight />, submenu:[], status: true },
+    ] ,status: true },
     {name: 'Contact', to: '/contact', icon: <FaConnectdevelop />, submenu: [] ,status: true },
     ]
 
