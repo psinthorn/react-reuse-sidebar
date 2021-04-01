@@ -10,7 +10,7 @@ const Sidebar = (props) => {
         fonts = {
             brand: '',
             menu: ''
-        }
+        },
     } = props; 
     
     // State ---------------------------------------------------------------------------------------------
@@ -21,21 +21,56 @@ const Sidebar = (props) => {
      // state for selected menu
      const [menuSelected, setMenuSelected] = useState(menuItems[0].name)
      // Stat of sub menu
-     const [subMenuState, setSubMenuState] =  useState({})
-     
-    
+     const [subMenusItemState, setSubMenusItemState] =  useState({})
+
+      
 
      // Function -----------------------------------------------------------------------------------------
 
+     // Submenu check and state
+    useEffect(() => {
+        const newSubMenus = {};
+
+        menuItems && menuItems.forEach((menu, index) => {
+            const hasSubMenus = !!menu.submenu.length;
+
+            if (hasSubMenus) {
+                newSubMenus[index] = {};
+                newSubMenus[index]['isOpen'] = false;
+                newSubMenus[index]['isSelected'] = null;
+            }
+        })
+
+    setSubMenusItemState(newSubMenus)
+    // console.log(newSubMenus)
+    // console.log(subMenusItemState)
+
+    }, [menuItems])
+
      // Handle menu item on click
-     const handleMenuItemOnClick = (menuName) => {
+     const handleMenuItemOnClick = (menuName, index) => {
+        console.log('click');
         setMenuSelected(menuName)
+       
+        if(subMenusItemState.hasOwnProperty(index)) {
+            const subMenusCopy = JSON.parse(JSON.stringify(subMenusItemState));
+            console.log('1st copy: ', subMenusCopy)
+
+            subMenusCopy[index]['isOpen'] = !subMenusItemState[index]['isOpen']
+            setSubMenusItemState(subMenusCopy)
+            console.log('after update state:',  subMenusItemState)   
+        }
+            // console.log('index: ', index, 'Menu: ', menuName)
+           
+        
      }
 
-    // Sidebar and Submenu check map to loop menu items
-    const menuItemsJSX = menuItems && menuItems.map((menu, i) => {
 
-            const isMenuItemSelected = menuSelected === menu.name
+    // Sidebar and Submenu check map to loop menu items
+    const menuItemsJSX = menuItems && menuItems.map((menu, index) => {
+
+            const isMenuItemSelected = menuSelected === menu.name;
+            const isSubMenuOpen = subMenusItemState[index]?.isOpen;
             //console.log(`${menu.name} is selected ${isMenuItemSelected}`)
 
             // Submenu check and loop submenu
@@ -44,7 +79,7 @@ const Sidebar = (props) => {
                 return (
                    
                         <s.SubMenuWrapper key={subMenuIndex} isSidebarOpen={isSidebarOpen}>
-                            <s.SubmenuItem >{subMenu.name}</s.SubmenuItem>
+                            <s.SubmenuItem onClick={() => {console.log(subMenu, subMenuIndex)}} >{subMenu.name}</s.SubmenuItem>
                             {/* <s.ArrowIcon></s.ArrowIcon> */}
                         </s.SubMenuWrapper>
                     
@@ -54,18 +89,18 @@ const Sidebar = (props) => {
 
             // Sidebar main menu
             return (
-                <s.MenuItemContainer key={i}  selected={isMenuItemSelected} isSidebarOpen={isSidebarOpen}>
+                <s.MenuItemContainer key={index}  selected={isMenuItemSelected} isSidebarOpen={isSidebarOpen}>
                     <s.MenuItemsWrapper selected={isMenuItemSelected} isSidebarOpen={isSidebarOpen}>
                         <s.MenuItems 
                         font={fonts.menu}
                         selected={isMenuItemSelected}
-                        onClick={()=>{handleMenuItemOnClick(menu.name)}}
+                        onClick={()=>{handleMenuItemOnClick(menu.name, index)}}
                         isSidebarOpen={isSidebarOpen}
                         >
                                 <s.Icon isSidebarOpen={isSidebarOpen}>{menu.icon}</s.Icon>
                                 <s.Text isSidebarOpen={isSidebarOpen} >{menu.name}</s.Text>
                                 {hasSubMenus && (
-                                    <s.DropdownIcon selected={isMenuItemSelected} isSidebarOpen={isSidebarOpen}/>
+                                    <s.DropdownIcon key={index} selected={isMenuItemSelected} isSubMenuOpen={isSubMenuOpen} />
                                 )}              
                         </s.MenuItems>
                             {hasSubMenus && (
@@ -84,7 +119,9 @@ const Sidebar = (props) => {
 
     // Effect -------------------------------------------------------------------------------------------
     // Update Branding 
-    useEffect(() => {isSidebarOpen ? setTimeout(() => {setBranding(brand.fullName)}, 300) : setTimeout(() => {setBranding(brand.shortName)}, 200)}, [isSidebarOpen, setBranding, brand.fullName, brand.shortName])
+    useEffect(() => {
+        isSidebarOpen ? setTimeout(() => {setBranding(brand.fullName)}, 300) : setTimeout(() => {setBranding(brand.shortName)}, 200)
+    }, [isSidebarOpen, setBranding, brand.fullName, brand.shortName])
 
 
     // Update Sidebar state by windows width
@@ -97,7 +134,7 @@ const Sidebar = (props) => {
          return () => window.removeEventListener('resize', windowsWidthUpdate);
  
      }, [isSidebarOpen])
- 
+
 
     // End of effect -----------------------------------------------------------------------------------------------------
 
