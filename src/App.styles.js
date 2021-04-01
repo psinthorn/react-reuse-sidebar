@@ -5,7 +5,7 @@ export const App = styled.div`
     width: 100%;
     height: 100vh;
     background: #fafafa;
-    color: pink;
+    // scolor: pink;
 `
 
 export const Header = styled.h1`

@@ -122,6 +122,7 @@ export const Icon = styled.span`
         text-align: ${props => !props.isSidebarOpen && 'center'};
         width: 80%;
         font-size: 1.3rem;
+        text-decoration: none;
         transition: .3s ease-in all;
 `
 
@@ -131,6 +132,7 @@ export const Text = styled.span`
         vertical-align: middle;
         width: 80%;
         white-space: nowrap;
+        text-decoration: none;
         padding: 1rem 0 0rem 0;
         transition: .3s ease-in all;  
 `
