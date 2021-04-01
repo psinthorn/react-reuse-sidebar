@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import {AnimatePresence, motion } from 'framer-motion'
 import * as s from './Sidebar.styles';
 
 const Sidebar = (props) => {
@@ -103,12 +104,21 @@ const Sidebar = (props) => {
                                     <s.DropdownIcon key={index} selected={isMenuItemSelected} isSubMenuOpen={isSubMenuOpen} />
                                 )}              
                         </s.MenuItems>
-                            {hasSubMenus && (
-                                <s.SubMenuContainer>
-                                    {SubMenuItemsJSX}
-                                </s.SubMenuContainer>
-                            )}
-                            
+                            <AnimatePresence>
+                                {hasSubMenus && isSubMenuOpen && (
+                                    <motion.nav
+                                        initial={{ opacity: 0, y: -15 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.3}}
+                                        exit={{ opacity: 0, y: -15 }}
+                                    >
+                                        <s.SubMenuContainer>
+                                        {SubMenuItemsJSX}
+                                        </s.SubMenuContainer>
+                                    </motion.nav>
+                                    
+                                )}
+                            </AnimatePresence>                     
                     </s.MenuItemsWrapper>
                 </s.MenuItemContainer>
               
