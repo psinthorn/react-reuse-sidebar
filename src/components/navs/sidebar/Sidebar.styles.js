@@ -140,9 +140,10 @@ export const DropdownIcon = styled.span`
         border: solid ${props => props.selected ? 'rgba(255, 112,85, 0.8)' : 'rgba(255, 255, 255, 1.0)'};
         border-width: 0 1px 1px 0;
         padding: 3px;
-        top: 24px;
+        top: ${props => props.isSubMenuOpen ? '26px' : '28px' };
         right: .1rem;
-        transform:  rotate(45deg);
+        transform:  ${props => props.isSubMenuOpen ? 'rotate(45deg)' : 'rotate(-135deg)' };
+        transition: .4s;
 
         :hover {
         border: solid rgba(255, 112,85, 0.8);
