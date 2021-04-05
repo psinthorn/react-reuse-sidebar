@@ -1,4 +1,5 @@
-// import * as s from './Locations.styles';
+import * as s from './Locations.styles';
+// import Location from "./Location";
 
 const Locations = (props) => {
     const location = props.match.params.location;
@@ -8,7 +9,7 @@ const Locations = (props) => {
         chaweng: {
             title: "Chaweng",
             desc: "Chaweng beach is most beutiful beach of Samui",
-            imf: "",
+            img: "/images/northern-lights.jpg",
             category: "travel",
             created_at: "",
             status: true
@@ -16,7 +17,7 @@ const Locations = (props) => {
         lamai: {
             title: "Lamai",
             desc: "Lamai beach is most beutiful beach of Samui",
-            imf: "",
+             img: "/images/northern-lights.jpg",
             category: "travel",
             created_at: "",
             status: true
@@ -24,7 +25,7 @@ const Locations = (props) => {
         bophut: {
             title: "Bophut",
             desc: "Bophut beach is most beutiful beach of Samui",
-            imf: "",
+             img: "/images/northern-lights.jpg",
             category: "travel",
             created_at: "",
             status: true
@@ -32,7 +33,7 @@ const Locations = (props) => {
         plaileam: {
             title: "Plaileam",
             desc: "Plaileam beach is most beutiful beach of Samui",
-            imf: "",
+             img: "/images/northern-lights.jpg",
             category: "travel",
             created_at: "",
             status: true
@@ -40,7 +41,7 @@ const Locations = (props) => {
         choengmon: {
             title: "Choengmon",
             desc: "Choengmon beach is most beutiful beach of Samui",
-            imf: "",
+             img: "/images/northern-lights.jpg",
             category: "travel",
             created_at: "",
             status: true
@@ -48,11 +49,22 @@ const Locations = (props) => {
         
     }
 
-
     return (
-        <div>
-            <h2>Locations Link Page</h2>
-        </div>
+        // <s.LocationContaner>
+        //    <Location locations={locations} locationParam={locationParam}></Location>
+        // </s.LocationContaner>
+
+        <div className="container">    
+            <div className="row">
+                    <div className="col-sm-12 col-md-6">
+                            <s.LocationImg img={locations[location]['img']} />
+                    </div>
+                    <div className="col-sm-12 col-md-6">
+                            <s.LocationDesc >{locations[location]['desc']}</s.LocationDesc>
+                    </div>
+            </div>
+        </div>  
+     
     )
 }
 
