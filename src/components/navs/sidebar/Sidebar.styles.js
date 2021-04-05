@@ -187,7 +187,7 @@ export const SubMenuWrapper = styled.div`
 `
 
 export const SubmenuItem = styled.div`
-    color: rgba(255,255, 255,1);
+    color: ${props => props.subMenuItemSelected ? 'rgba(255, 112,85, 0.8)' : 'rgba(255, 255, 255, 1.0)'};
      &:hover {
         color: rgba(255, 112,85, 0.8);
         transition: .1s ease-in all;

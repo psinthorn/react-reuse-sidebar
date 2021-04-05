@@ -51,21 +51,25 @@ const Sidebar = (props) => {
 
      // Handle menu item on click
      const handleMenuItemOnClick = (menuName, index) => {
-        console.log('click');
-        setMenuSelected(menuName)
-       
-        if(subMenusItemState.hasOwnProperty(index)) {
-            const subMenusCopy = JSON.parse(JSON.stringify(subMenusItemState));
-            console.log('1st copy: ', subMenusCopy)
 
-            subMenusCopy[index]['isOpen'] = !subMenusItemState[index]['isOpen']
-            setSubMenusItemState(subMenusCopy)
-            console.log('after update state:',  subMenusItemState)   
-        }
-            // console.log('index: ', index, 'Menu: ', menuName)
-           
-        
+        setMenuSelected(menuName)
+
+            if(subMenusItemState.hasOwnProperty(index)) {
+                const subMenusCopy = JSON.parse(JSON.stringify(subMenusItemState));
+                subMenusCopy[index]['isOpen'] = !subMenusItemState[index]['isOpen']
+                setSubMenusItemState(subMenusCopy)
+            } 
      }
+
+     // Handle SubMenuItem on click
+     const handleSubMenuOnClick = (index, SubMenuIndex) => {
+            const subMenusCopy = JSON.parse(JSON.stringify(subMenusItemState));
+            subMenusCopy[index]['isSelected'] = SubMenuIndex;
+            setSubMenusItemState(subMenusCopy);
+            //console.log('after update state:',  subMenusItemState)   
+        }
+           
+            
 
 
     // Sidebar and Submenu check map to loop menu items
@@ -78,11 +82,17 @@ const Sidebar = (props) => {
             // Submenu check and loop submenu
             const hasSubMenus = !!menu.submenu.length;
             const SubMenuItemsJSX = menu.submenu && menu.submenu.map((subMenu, subMenuIndex) => {
+
+                // This will be return true or false
+                const subMenuItemSelected = subMenusItemState[index]?.isSelected ===  subMenuIndex
                 return (
                    
                         <s.SubMenuWrapper key={subMenuIndex} isSidebarOpen={isSidebarOpen}>
                             <Link to={`${menu.to}${subMenu.to}`} style={{ textDecoration: 'none'}}>
-                            <s.SubmenuItem onClick={() => {console.log(subMenu, subMenuIndex)}} >{subMenu.name}</s.SubmenuItem>
+                            <s.SubmenuItem 
+                            onClick={() => {handleSubMenuOnClick(index, subMenuIndex)}} 
+                            subMenuItemSelected = {subMenuItemSelected}
+                            >{subMenu.name}</s.SubmenuItem>
                             {/* <s.ArrowIcon></s.ArrowIcon> */}
                             </Link>
                         </s.SubMenuWrapper>
@@ -90,6 +100,7 @@ const Sidebar = (props) => {
                         )
             })
             // End of submenu render
+
 
             // Sidebar main menu
             return (

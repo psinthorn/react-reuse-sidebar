@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const LocationContainer = styled.div`
+export const BlogContainer = styled.div`
     display: flex;
     width: 80%;
     justify-content: space-between;
@@ -8,7 +8,7 @@ export const LocationContainer = styled.div`
 
 `
 
-export const LocationImg = styled.img`
+export const BlogImg = styled.img`
     /* width: 50%; */
     width: 100%;
     height: 250px;
@@ -20,7 +20,7 @@ export const LocationImg = styled.img`
 
 `
 
-export const LocationDesc = styled.div`
+export const BlogDesc = styled.div`
      /* width: 50%; */
      width: 100%;
     align-items: top;
