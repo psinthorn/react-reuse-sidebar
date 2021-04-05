@@ -1,9 +1,10 @@
-import React from 'react'
 
 const Coding = () => {
+    
+
     return (
         <div>
-            <h2>Coding Page</h2>
+            <h2>Coding</h2>
         </div>
     )
 }
