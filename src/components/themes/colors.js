@@ -13,7 +13,7 @@ export const darkOrange = {
 
 export const whiteOrange = {
   // bgColor1: 'rgba(252, 82, 150, 0.8)',
-  bgColor1: 'rgba(255, 255, 255, 1)',
+  bgColor1: 'rgba(255, 255, 255, .5)',
   bgColor2: 'rgba(255, 255, 255, 1)',
   fontColor: 'rgba(0, 0, 0, 0.8)',
   fontColorSelected: 'rgba(255, 112, 85, 1)',

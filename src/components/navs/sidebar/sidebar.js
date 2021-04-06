@@ -13,13 +13,16 @@ const Sidebar = (props) => {
             brand: '',
             menu: ''
         },
+
+        // Use darkOrange as default color palette
         colorPalette = {
-            bgColor1: 'rgba(67, 67, 67, 0.8)',
+            bgColor1: 'rgba(0, 0, 0, 0.8)',
             bgColor2: 'rgba(0, 0, 0, 0.8)',
-            fontColor: 'rgba(161, 161, 161)',
-            fontColorSelected: 'rgba(255, 255, 255)',
-            dividerColor: 'rgba(48, 48, 48)',
-            selectedBackgroundCollapsedMode: 'light'
+            fontColor: 'rgba(255, 255, 255)',
+            fontColorSelected: 'rgba(255, 112, 85, 0.8)',
+            hoverColor: 'rgba(255, 112,85, 0.8)',
+            dividerColor: 'rgba(255, 112, 85, 0.8)',
+            selectedBackgroundCollapsedMode: 'dark'
         },
     } = props; 
     
