@@ -16,6 +16,7 @@ export const SidebarContainer = styled.div`
     background-repeat: no-repeat;
     background-position: center center;
     transition: .3s ease-in all;
+    box-shadow: 3px 0px 10px #ccc;
 `
 
 export const SideBarBrandContainer = styled.div`
