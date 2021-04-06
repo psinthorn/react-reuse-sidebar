@@ -13,6 +13,14 @@ const Sidebar = (props) => {
             brand: '',
             menu: ''
         },
+        colorPalette = {
+            bgColor1: 'rgba(67, 67, 67, 0.8)',
+            bgColor2: 'rgba(0, 0, 0, 0.8)',
+            fontColor: 'rgba(161, 161, 161)',
+            fontColorSelected: 'rgba(255, 255, 255)',
+            dividerColor: 'rgba(48, 48, 48)',
+            selectedBackgroundCollapsedMode: 'light'
+        },
     } = props; 
     
     // State ---------------------------------------------------------------------------------------------
@@ -53,12 +61,19 @@ const Sidebar = (props) => {
      const handleMenuItemOnClick = (menuName, index) => {
 
         setMenuSelected(menuName)
+        const subMenusCopy = JSON.parse(JSON.stringify(subMenusItemState));
 
             if(subMenusItemState.hasOwnProperty(index)) {
-                const subMenusCopy = JSON.parse(JSON.stringify(subMenusItemState));
                 subMenusCopy[index]['isOpen'] = !subMenusItemState[index]['isOpen']
                 setSubMenusItemState(subMenusCopy)
-            } 
+            } else {
+                    
+                for (let item in subMenusItemState) {
+                    subMenusCopy[item]['isOpen'] = false;
+                    subMenusCopy[item]['isSelected'] = null;
+                }
+                setSubMenusItemState(subMenusCopy);
+            }
      }
 
      // Handle SubMenuItem on click
@@ -87,12 +102,19 @@ const Sidebar = (props) => {
                 const subMenuItemSelected = subMenusItemState[index]?.isSelected ===  subMenuIndex
                 return (
                    
-                        <s.SubMenuWrapper key={subMenuIndex} isSidebarOpen={isSidebarOpen}>
+                        <s.SubMenuWrapper 
+                            key={subMenuIndex} 
+                            isSidebarOpen={isSidebarOpen}
+                            colorPalette={colorPalette}
+                        >
                             <Link to={`${menu.to}${subMenu.to}`} style={{ textDecoration: 'none'}}>
                             <s.SubmenuItem 
                             onClick={() => {handleSubMenuOnClick(index, subMenuIndex)}} 
                             subMenuItemSelected = {subMenuItemSelected}
-                            >{subMenu.name}</s.SubmenuItem>
+                            colorPalette={colorPalette}
+                            >
+                            {subMenu.name}
+                            </s.SubmenuItem>
                             {/* <s.ArrowIcon></s.ArrowIcon> */}
                             </Link>
                         </s.SubMenuWrapper>
@@ -105,18 +127,27 @@ const Sidebar = (props) => {
             // Sidebar main menu
             return (
                 <s.MenuItemContainer key={index}  selected={isMenuItemSelected} isSidebarOpen={isSidebarOpen}>
-                    <s.MenuItemsWrapper selected={isMenuItemSelected} isSidebarOpen={isSidebarOpen}>
+                    <s.MenuItemsWrapper 
+                        selected={isMenuItemSelected}
+                        isSidebarOpen={isSidebarOpen}
+                        colorPalette={colorPalette}
+                    >
                         <Link to={menu.to} style={{ textDecoration: 'none'}} >
                             <s.MenuItems 
                             font={fonts.menu}
                             selected={isMenuItemSelected}
                             onClick={()=>{handleMenuItemOnClick(menu.name, index)}}
                             isSidebarOpen={isSidebarOpen}
+                            colorPalette={colorPalette}
                             >
                                     <s.Icon isSidebarOpen={isSidebarOpen}>{menu.icon}</s.Icon>
                                     <s.Text isSidebarOpen={isSidebarOpen}>{menu.name}</s.Text>
                                     {hasSubMenus && (
-                                        <s.DropdownIcon key={index} selected={isMenuItemSelected} isSubMenuOpen={isSubMenuOpen} />
+                                        <s.DropdownIcon 
+                                            key={index} 
+                                            selected={isMenuItemSelected} 
+                                            isSubMenuOpen={isSubMenuOpen}
+                                            colorPalette={colorPalette} />
                                     )}              
                             </s.MenuItems>
                         </Link>
@@ -166,15 +197,25 @@ const Sidebar = (props) => {
 
     // Render sidebar menu -----------------------------------------------------------------------------------------------
     return (
-        <s.SidebarContainer bgImg={bgImg} isSidebarOpen={isSidebarOpen}>
+        <s.SidebarContainer 
+            bgImg={bgImg} 
+            isSidebarOpen={isSidebarOpen} 
+            colorPalette={colorPalette}
+        >
             <s.SideBarBrandContainer>
-                <s.SidebarBrand font={fonts.brand}>{Branding}</s.SidebarBrand>
+                <s.SidebarBrand 
+                    font={fonts.brand}
+                    colorPalette={colorPalette}
+                >{Branding}</s.SidebarBrand>
             </s.SideBarBrandContainer>
             <s.MenuContainer >
                 {menuItemsJSX}
             </s.MenuContainer>
             <s.MenuToggleContainer>
-                    <s.MenuToggle onClick={() => setSidebarState(!isSidebarOpen)} />
+                    <s.MenuToggle 
+                        onClick={() => setSidebarState(!isSidebarOpen)}
+                        colorPalette={colorPalette}
+                     />
                 </s.MenuToggleContainer>
         </s.SidebarContainer>
     )

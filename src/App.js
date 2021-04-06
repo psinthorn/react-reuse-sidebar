@@ -1,6 +1,7 @@
 import React from 'react';
 import {FaMicroblog,FaExpand,FaConnectdevelop,FaHome,FaRoute, FaChargingStation, FaChevronRight} from  'react-icons/fa'
 import * as s from './App.styles';
+import * as Palette from './components/themes/colors'
 
 // components
 import MainView from './components/mainview/MainView';
@@ -37,7 +38,13 @@ function App(){
 
   return (
     <s.App>
-       <Sidebar brand={brand} bgImg={bgImg} fonts={fonts} menuItems={menuItems}/>
+       <Sidebar 
+        brand={brand} 
+        bgImg={bgImg} 
+        fonts={fonts} 
+        menuItems={menuItems}
+        colorPalette={Palette.darkOrange}
+        />
        <MainView />
     </s.App>
   );
