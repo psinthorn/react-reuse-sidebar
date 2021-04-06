@@ -57,6 +57,7 @@ const Locations = (props) => {
         <div className="container">    
             <div className="row">
                     <div className="col-sm-12 col-md-6">
+                            {/* <img src=`${locations[location]['img']}` className='img-fluid' /> */}
                             <s.LocationImg img={locations[location]['img']} />
                     </div>
                     <div className="col-sm-12 col-md-6">

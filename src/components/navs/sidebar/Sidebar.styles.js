@@ -6,11 +6,11 @@ export const SidebarContainer = styled.div`
     width: ${props => props.isSidebarOpen ? '20%' : '5%'};
     max-width: 280px;
     min-width: 80px;
-    color: #fff;
+    color: ${props => props.colorPalette.fontColor};
     background-image: linear-gradient(
         315deg, 
-        rgba(255, 255, 255,0.5)10%, 
-        rgba(0,0,0,0.9)90%),
+        ${props => props.colorPalette.bgColor1}10%,
+        ${props => props.colorPalette.bgColor2}90%),
         url(${props => props.bgImg});
     background-size: cover;
     background-repeat: no-repeat;
@@ -32,6 +32,7 @@ export const SideBarBrandContainer = styled.div`
 export const SidebarBrand = styled.div`
         position: absolute;  
         font-family: ${props => props.font};
+        color: ${props => props.colorPalette.fontColor};
         font-size: 2rem;
         width: 80%;
         // top: 10px;
@@ -52,7 +53,7 @@ export const MenuContainer = styled.div`
 `
 
 export const MenuItemContainer = styled.div`
-        ${props => !props.isSidebarOpen && `text-align: center; ${props.selected && ''} background: rgba(0, 0, 0, 0.6)`};
+        ${props => !props.isSidebarOpen && `text-align: center; ${props.selected && ''} background: ${props => props.colorPalette.bgColor1 }`};
         width: 100%;
         top: 10%;
         left: 0;
@@ -65,7 +66,7 @@ export const MenuItemContainer = styled.div`
 export const MenuItems = styled.div`
     font-family: ${props => props.font};
     width: 100%;
-    color: ${props => props.selected ? 'rgba(255, 112,85, 0.8)' : 'rgba(255, 255, 255, 1.0)'};
+    color: ${props => props.selected ? `${props.colorPalette.fontColorSelected}` : `${props.colorPalette.fontColor}`};
     white-space: nowrap;
     top: 0;
     left: 0;
@@ -80,7 +81,7 @@ export const MenuItems = styled.div`
     // -----------------------------------------------------------------
 
     :hover {
-        color: rgba(255, 112,85, 0.8);
+        color: ${props => props.colorPalette.fontColorSelected};
         transition: .1s ease-in all;
     }
 
@@ -89,7 +90,7 @@ export const MenuItems = styled.div`
     ${props => !props.selected && `
         &:hover {
             &:after {
-                border-top: 1px solid rgba(255, 112,85, 0.4);
+                border-top: 1px solid ${props.colorPalette.dividerColor};
                 transition: .1s ease-in all;
             }
         }
@@ -103,14 +104,14 @@ export const MenuItemsWrapper = styled.div`
     width: 80%;
 
     &:hover {
-        color: rgba(255, 112,85, 0.8);
+        color: ${props => props.colorPalette.fontColorSelected};
         transition: .1s ease-in all;
     }
 
     &:after {
         content: '';
         display: block;
-        border-top: 1px solid ${props => props.selected ? 'rgba(255, 112,85, 0.8)' : 'rgba(255, 255, 255, 0.8)'};     
+        border-top: 1px solid ${props => props.selected ? `${props.colorPalette.fontColorSelected}` : `${props.colorPalette.fontColor}`};     
     }
    
 `
@@ -139,7 +140,7 @@ export const Text = styled.span`
 
 export const DropdownIcon = styled.span`
         position: absolute;
-        border: solid ${props => props.selected ? 'rgba(255, 112,85, 0.8)' : 'rgba(255, 255, 255, 1.0)'};
+        border: solid ${props => props.selected ? `${props.colorPalette.fontColorSelected}` : `${props.colorPalette.fontColor}`};
         border-width: 0 1px 1px 0;
         padding: 3px;
         top: ${props => props.isSubMenuOpen ? '26px' : '28px' };
@@ -148,7 +149,7 @@ export const DropdownIcon = styled.span`
         transition: .4s;
 
         :hover {
-        border: solid rgba(255, 112,85, 0.8);
+        border: solid ${props => props.colorPalette.hoverColor};
         border-width: 0 1px 1px 0;
         padding: 3px;
         top: 24px;
@@ -175,7 +176,7 @@ export const SubMenuWrapper = styled.div`
     font-size: 14px;
 
     &:hover {
-        color: rgba(255, 112,85, 0.8);
+        color: ${props => props.colorPalette.fontColorSelected};
         transition: .1s ease-in all;
     }
 
@@ -187,9 +188,9 @@ export const SubMenuWrapper = styled.div`
 `
 
 export const SubmenuItem = styled.div`
-    color: ${props => props.subMenuItemSelected ? 'rgba(255, 112,85, 0.8)' : 'rgba(255, 255, 255, 1.0)'};
+    color: ${props => props.subMenuItemSelected ? `${props.colorPalette.fontColorSelected}` : `${props.colorPalette.fontColor}`};
      &:hover {
-        color: rgba(255, 112,85, 0.8);
+        color: ${props => props.colorPalette.fontColorSelected};
         transition: .1s ease-in all;
     }
 
@@ -227,6 +228,7 @@ export const MenuToggleContainer = styled.div`
 `
 export const MenuToggle = styled.div`
         position: relative; // for horizontal line 
+        color: ${props => props.colorPalette.fontColor};
         height: 40px;
         width: 100%;
         left: 0;
@@ -238,6 +240,7 @@ export const MenuToggle = styled.div`
 
         &:after {
             content: '';
+            color: ${props => props.colorPalette.fontColor};
             position: absolute;
             left: 0;
             right: 0;
@@ -246,9 +249,9 @@ export const MenuToggle = styled.div`
             height: .1em;
             width: 20%;
             min-width: 40px;
-            background: #fff;
+            background: ${props => props.colorPalette.fontColor};
             box-shadow:
-                0 .75em 0 0 #fff,
-                0 1.5em 0 0 #fff;
+                0 .75em 0 0 ${props => props.colorPalette.fontColor},
+                0 1.5em 0 0 ${props => props.colorPalette.fontColor};
         }
 `
