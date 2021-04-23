@@ -1,0 +1,32 @@
+# Requirements
+#   branches:
+#     - production
+#     - staging
+#   FTP:
+#     - domain or subdomain 
+#     - domain or subdomain FTP url
+#     - username and password of ftp domain or subdomain
+
+on:
+  push:
+    branches:
+      - production
+name: 🚀 Deploy React Reuse Sidebar to shared hosting on push
+jobs:
+  web-dploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2.3.2
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        # use domain or subdomain url and create new ftp user for specific url
+        # server: domain.com or subdomain.domain.com
+        # secrets setup on github secrets section
+        server: ${{ secrets.iacc_ftp_server }}
+        username: ${{ secrets.iacc_ftp_username }}
+        password: ${{ secrets.iacc_ftp_pass }}
+        # server-dir: "/directory_name"
